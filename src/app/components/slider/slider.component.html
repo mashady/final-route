@@ -1,0 +1,30 @@
+<div class="row gx-0 mt-4">
+  <div class="col-md-9">
+    <owl-carousel-o [options]="MianSliderCustomOptions">
+      <ng-template carouselSlide>
+        <img src="assets/main-slider-1.jpeg" height="400px" width="100%" />
+      </ng-template>
+      <ng-template carouselSlide>
+        <img src="assets/main-slider-2.jpeg" height="400px" width="100%" />
+      </ng-template>
+      <ng-template carouselSlide>
+        <img src="assets/main-slider-3.jpeg" height="400px" width="100%" />
+      </ng-template>
+    </owl-carousel-o>
+  </div>
+  <div class="col-md-3">
+    <img src="assets/main-slider-2.jpeg" height="200px" width="100%" />
+    <img src="assets/main-slider-3.jpeg" height="200px" width="100%" />
+  </div>
+</div>
+
+<div>
+  <owl-carousel-o [options]="customOptions">
+    <ng-container *ngFor="let cat of Category">
+      <ng-template carouselSlide [id]="cat._id">
+        <img [src]="cat.image" [alt]="cat.name" height="150px" />
+        <h6>{{ cat.name }}</h6>
+      </ng-template>
+    </ng-container>
+  </owl-carousel-o>
+</div>

@@ -1,0 +1,8 @@
+.loading-icon {
+  -webkit-animation: fa-spin 2s infinite linear;
+  animation: fa-spin 2s infinite linear;
+}
+
+.loading-icon:before {
+  font-family: FontAwesome;
+}

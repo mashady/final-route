@@ -1,0 +1,28 @@
+<div class="row align-items-center">
+  <div class="col-md-4">
+    <img [src]="productItem.imageCover" class="w-100" />
+  </div>
+  <div class="col-md-8">
+    <h2>{{ productItem?.title }}</h2>
+    <p>
+      {{ productItem?.description }}
+    </p>
+    <span class="font-sm text-muted">
+      {{ productItem?.category.name }}
+    </span>
+    <div class="d-flex justify-content-between py-2">
+      <span> {{ productItem?.price }} EGP </span>
+      <span>
+        <i class="fa fa-star rating-color"></i>
+        {{ productItem?.ratingsAverage }}
+      </span>
+    </div>
+    <button
+      (click)="addProductToCart(productItem._id)"
+      class="btn bg-main text-white w-100"
+    >
+      + Add
+    </button>
+  </div>
+</div>
+>

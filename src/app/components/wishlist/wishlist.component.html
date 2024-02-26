@@ -1,0 +1,19 @@
+<div *ngFor="let product of wishes">
+  <div class="d-flex flex-row justify-content-between align-items-center">
+    <div class="d-flex flex-row">
+      <img [src]="product.imageCover" width="150px" />
+      <div
+        class="d-flex flex-column justify-content-center justify-content-center"
+      >
+        <h3>{{ product.title }}</h3>
+        <span>{{ product.price }} EGP</span>
+        <i
+          class="fa fa-trash text-danger"
+          (click)="removeOneFromWish(product._id)"
+        ></i>
+      </div>
+    </div>
+
+    <button class="btn btn-outline-info">Add to cart</button>
+  </div>
+</div>

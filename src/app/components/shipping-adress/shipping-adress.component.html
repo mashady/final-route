@@ -1,0 +1,20 @@
+<div class="mt-4">
+  <form
+    [formGroup]="shippingAddress"
+    (ngSubmit)="submitShippingAdress(shippingAddress)"
+  >
+    <div class="mb-3">
+      <label>details</label>
+      <input formControlName="details" type="text" class="form-control" />
+    </div>
+    <div class="mb-3">
+      <label>phone</label>
+      <input formControlName="phone" type="tel" class="form-control" />
+    </div>
+    <div class="mb-3">
+      <label>city</label>
+      <input formControlName="city" type="text" class="form-control" />
+    </div>
+    <button class="bg-main text-white d-block ms-auto btn">buy</button>
+  </form>
+</div>

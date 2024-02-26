@@ -1,0 +1,144 @@
+<div class="my-4">
+  <h1>Rigster Now :</h1>
+  <div *ngIf="apiError" class="alert alert-danger">{{ apiError }}</div>
+  <form [formGroup]="registerForm">
+    <div class="mt-2">
+      <label for="">username :</label>
+      <input formControlName="name" type="name" class="form-control" />
+      <div
+        *ngIf="
+          registerForm.get('name')?.touched && registerForm.get('name')?.errors
+        "
+        class="alert alert-danger p-0 mt-2"
+      >
+        <p
+          *ngIf="registerForm.get('name')?.errors?.['required']"
+          class="p-1 m-0"
+        >
+          name is required
+        </p>
+        <p
+          *ngIf="registerForm.get('name')?.errors?.['minlength']"
+          class="p-1 m-0"
+        >
+          min length is 5 characters
+        </p>
+        <p
+          *ngIf="registerForm.get('name')?.errors?.['maxlength']"
+          class="p-1 m-0"
+        >
+          max length is 50 characters
+        </p>
+      </div>
+    </div>
+    <div class="mt-2">
+      <label for="">email :</label>
+      <input formControlName="email" type="email" class="form-control" />
+      <div
+        *ngIf="
+          registerForm.get('email')?.touched &&
+          registerForm.get('email')?.errors
+        "
+        class="alert alert-danger p-0 mt-2"
+      >
+        <p
+          *ngIf="registerForm.get('email')?.errors?.['required']"
+          class="p-1 m-0"
+        >
+          email is required
+        </p>
+        <p *ngIf="registerForm.get('email')?.errors?.['email']" class="p-1 m-0">
+          enter a valid email
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-2">
+      <label for="">password :</label>
+      <input formControlName="password" type="password" class="form-control" />
+      <div
+        *ngIf="
+          registerForm.get('password')?.touched &&
+          registerForm.get('password')?.errors
+        "
+        class="alert alert-danger p-0 mt-2"
+      >
+        <p
+          *ngIf="registerForm.get('password')?.errors?.['required']"
+          class="p-1 m-0"
+        >
+          password is required
+        </p>
+        <p
+          *ngIf="registerForm.get('password')?.errors?.['pattern']"
+          class="p-1 m-0"
+        >
+          pattern is not valid
+        </p>
+      </div>
+    </div>
+    <div class="mt-2">
+      <label for="">re passowrd :</label>
+      <input
+        formControlName="rePassword"
+        type="password"
+        class="form-control"
+      />
+      <div
+        *ngIf="
+          registerForm.get('rePassword')?.touched &&
+          registerForm.get('rePassword')?.errors
+        "
+        class="alert alert-danger p-0 mt-2"
+      >
+        <p
+          *ngIf="registerForm.get('rePassword')?.errors?.['required']"
+          class="p-1 m-0"
+        >
+          password is required
+        </p>
+        <p
+          *ngIf="registerForm.get('rePassword')?.errors?.['rePasswordMatch']"
+          class="p-1 m-0"
+        >
+          pattern is not match
+        </p>
+      </div>
+    </div>
+    <div class="mt-2">
+      <label for="">phone :</label>
+      <input formControlName="phone" type="tel" class="form-control" />
+      <div
+        *ngIf="
+          registerForm.get('phone')?.touched &&
+          registerForm.get('phone')?.errors
+        "
+        class="alert alert-danger p-0 mt-2"
+      >
+        <p
+          *ngIf="registerForm.get('phone')?.errors?.['required']"
+          class="p-1 m-0"
+        >
+          phone is required
+        </p>
+        <p
+          *ngIf="registerForm.get('phone')?.errors?.['pattern']"
+          class="p-1 m-0"
+        >
+          phone number is not valid
+        </p>
+      </div>
+    </div>
+    <button
+      (click)="submitRegister(registerForm)"
+      type="button"
+      class="bg-main text-white btn mt-3 ms-auto d-block"
+      [disabled]="registerForm.invalid"
+    >
+      <span *ngIf="!isLoading">Register</span>
+      <div class="loading-icon">
+        <i *ngIf="isLoading" class="fa fa-spinner fa-spin"></i>
+      </div>
+    </button>
+  </form>
+</div>

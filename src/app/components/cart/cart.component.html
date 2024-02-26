@@ -1,0 +1,56 @@
+<div *ngIf="emptyCart">your cart is empty</div>
+<div *ngIf="!emptyCart">
+  <div class="d-flex justify-content-between mt-4 mb-3">
+    <p class="text-main">
+      <span class="fw-bolder">{{ cartItems.numOfCartItems }}</span>
+    </p>
+    <p class="text-main">
+      <span class="fw-bolder">{{ cartItems?.data?.totalCartPrice }}</span>
+    </p>
+  </div>
+  <button
+    class="btn btn-outline-danger ms-auto d-block mb-3"
+    (click)="clearCart()"
+  >
+    clear cart
+  </button>
+  <div class="row shadow-sm" *ngFor="let product of cartItems.data?.products">
+    <div class="col-md-1">
+      <img [src]="product.product.imageCover" class="w-100" />
+    </div>
+    <div class="col-md-11 d-flex justify-content-between">
+      <div class="">
+        <h4>{{ product.product.title }}</h4>
+        <p>{{ product.price }}</p>
+        <span
+          (click)="removeProductFromCart(product.product.id)"
+          class="text-danger cursor-pointer"
+        >
+          remove product
+          <i class="fa fa-trash"></i>
+        </span>
+      </div>
+      <div class="">
+        <button
+          class="btn bg-main text-white"
+          (click)="updateCart(product.product.id, product.count + 1)"
+        >
+          +
+        </button>
+        <span class="p-3">{{ product.count }}</span>
+        <button
+          class="btn bg-main text-white"
+          (click)="updateCart(product.product.id, product.count - 1)"
+        >
+          -
+        </button>
+      </div>
+    </div>
+  </div>
+  <button
+    [routerLink]="['/shippingAddress', cartId]"
+    class="btn bg-main text-white ms-auto d-block"
+  >
+    pay
+  </button>
+</div>
