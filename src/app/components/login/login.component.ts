@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { CartService } from '../../services/cart.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,7 +19,11 @@ export class LoginComponent {
     ]),
   });
 
-  constructor(private _AuthService: AuthService, public _Router: Router) {}
+  constructor(
+    private _AuthService: AuthService,
+    public _Router: Router,
+    private CartService: CartService
+  ) {}
 
   submitLogin(dataForm: FormGroup) {
     this.isLoading = true;
@@ -37,6 +42,9 @@ export class LoginComponent {
         error: (err) => {
           console.log(err);
           this.apiError = err.error.message;
+        },
+        complete: () => {
+          this.CartService.cartInit();
         },
       });
     }

@@ -112,9 +112,14 @@
           >
         </li>
         <li class="nav-item" *ngIf="isLogin">
-          <a class="nav-link cursor-pointer">{{
-            numberOfCart === 0 ? null : numberOfCart
-          }}</a>
+          <a class="nav-link cursor-pointer position-relative">
+            <i class="fa fa-cart-shopping cursor-pointer"> </i>
+            <span
+              class="badge bg-main"
+              style="font-size: 0.5rem; position: absolute; right: -5px"
+              >{{ numberOfCart === 0 ? null : numberOfCart }}</span
+            >
+          </a>
         </li>
       </ul>
     </div>

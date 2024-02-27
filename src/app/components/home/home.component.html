@@ -1,6 +1,17 @@
 <app-slider> </app-slider>
+<div class="w-75 mx-auto">
+  <input
+    [(ngModel)]="term"
+    type="text"
+    class="form-control"
+    placeholder="search by title"
+  />
+</div>
 <div class="row">
-  <div class="col-md-2 cursor-pointer" *ngFor="let product of productList">
+  <div
+    class="col-md-2 cursor-pointer"
+    *ngFor="let product of productList | search : term"
+  >
     <div class="product p-2">
       <div [routerLink]="['/product-details', product._id]">
         <img [src]="product.imageCover" width="100%" />
@@ -37,7 +48,4 @@
       </div>
     </div>
   </div>
-</div>
-<div *ngIf="isLoading">
-  <app-loader></app-loader>
 </div>

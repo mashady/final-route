@@ -11,14 +11,7 @@ export class CartService {
   };
   numberOfCartItems = new BehaviorSubject(0);
   constructor(private _HttpClient: HttpClient) {
-    this.getUserCart().subscribe({
-      next: (res: any) => {
-        console.log(res);
-        console.log('this re from service');
-        this.numberOfCartItems.next(res.numOfCartItems);
-      },
-      error: (err) => console.error(err),
-    });
+    this.cartInit();
   }
 
   addProductToCart(productId: string) {
@@ -27,6 +20,16 @@ export class CartService {
       { productId: productId },
       { headers: this.headers }
     );
+  }
+  cartInit() {
+    this.getUserCart().subscribe({
+      next: (res: any) => {
+        console.log(res);
+        console.log('this re from service');
+        this.numberOfCartItems.next(res.numOfCartItems);
+      },
+      error: (err) => console.error(err),
+    });
   }
   getUserCart(): Observable<any> {
     return this._HttpClient.get(`${this.baseUrl}/api/v1/cart`, {

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CartService } from '../../services/cart.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-cart',
@@ -10,11 +11,15 @@ export class CartComponent {
   cartItems: any = [];
   emptyCart: boolean = true;
   cartId: string = '';
-  constructor(private _CartService: CartService) {}
+  constructor(
+    private _CartService: CartService,
+    public LoadingService: LoadingService
+  ) {}
   ngOnInit(): void {
     this.getUserData();
   }
   getUserData() {
+    this.LoadingService.loading.next(true);
     this._CartService.getUserCart().subscribe({
       next: (res) => {
         this.cartItems = res;
@@ -22,6 +27,7 @@ export class CartComponent {
         console.log(res);
         console.log('this res from cart comp ts');
         this.emptyCart = false;
+        this.LoadingService.loading.next(false);
       },
       error: (err) => {
         console.log(err);

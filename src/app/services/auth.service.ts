@@ -30,6 +30,12 @@ export class AuthService {
   signIn(data: any): Observable<any> {
     return this._HttpClient.post(`${this.baseUrl}/api/v1/auth/signin`, data);
   }
+  forget(data: any): Observable<any> {
+    return this._HttpClient.post(
+      `${this.baseUrl}/api/v1/auth/forgotPasswords`,
+      data
+    );
+  }
 
   logOut() {
     localStorage.removeItem('userToken');

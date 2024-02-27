@@ -4,6 +4,7 @@ import { subscribeOn } from 'rxjs';
 import { ProductsService } from 'src/app/services/products.service';
 import { CartService } from '../../services/cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-product-details',
@@ -17,17 +18,21 @@ export class ProductDetailsComponent {
     private _ProductsService: ProductsService,
     private _ActivatedRoute: ActivatedRoute,
     private _CartService: CartService,
-    private _ToastrService: ToastrService
+    private _ToastrService: ToastrService,
+    public LoadingService: LoadingService
   ) {}
   ngOnInit() {
     this._ActivatedRoute.params.subscribe((params) => {
       this.productId = params['id'];
     });
+    this.LoadingService.loading.next(true);
+
     this._ProductsService.getProductById(this.productId).subscribe({
       next: (product) => {
         console.log(product.data);
 
         this.productItem = product.data;
+        this.LoadingService.loading.next(false);
       },
       error: (err) => {
         console.log(err);

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { WhishlistService } from '../../services/whishlist.service';
 import { CartService } from '../../services/cart.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-wishlist',
@@ -11,7 +12,8 @@ export class WishlistComponent {
   wishes: any = [];
   constructor(
     public _WhishlistService: WhishlistService,
-    public _CartService: CartService
+    public _CartService: CartService,
+    public LoadingService: LoadingService
   ) {}
   ngOnInit() {
     this.getWishes();
@@ -19,6 +21,8 @@ export class WishlistComponent {
 
   // get all user wishlist
   getWishes() {
+    this.LoadingService.loading.next(true);
+
     /**
     if (this._WhishlistService.hasData === true) {
       console.log('u already have the data');
@@ -41,6 +45,7 @@ export class WishlistComponent {
       next: (res) => {
         console.log(res);
         this.wishes = res.data;
+        this.LoadingService.loading.next(false);
       },
       error: (err) => {
         console.log(err);

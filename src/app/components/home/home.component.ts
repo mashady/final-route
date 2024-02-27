@@ -4,6 +4,7 @@ import { Product } from 'src/app/interfaces/products';
 import { CartService } from '../../services/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { WhishlistService } from '../../services/whishlist.service';
+import { LoadingService } from 'src/app/services/loading.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -12,11 +13,13 @@ import { WhishlistService } from '../../services/whishlist.service';
 export class HomeComponent {
   isLoading: boolean = true;
   productList: Product[] = [];
+  term: string = '';
   constructor(
     public _ProductsService: ProductsService,
     public _CartService: CartService,
     private _ToastrService: ToastrService,
-    public _WhishlistService: WhishlistService
+    public _WhishlistService: WhishlistService,
+    public LoadingService: LoadingService
   ) {}
 
   ngOnInit() {
@@ -24,21 +27,26 @@ export class HomeComponent {
     if (this._ProductsService.getData().length > 0) {
       console.log(this._ProductsService.getData());
     }
+
 */
+
     if (this._ProductsService.hasData === true) {
       this.productList = this._ProductsService.getData();
-      this.isLoading = false;
+      //this.isLoading = false;
     } else {
+      this.LoadingService.loading.next(true);
+
       this._ProductsService.getAllProducts().subscribe({
         next: (res) => {
           console.log(res.data);
           this.productList = res.data;
-          this.isLoading = false;
+          //this.isLoading = false;
           this._ProductsService.setData(res.data);
+          this.LoadingService.loading.next(false);
         },
         error: (err) => {
           console.log(err);
-          this.isLoading = false;
+          //this.isLoading = false;
         },
       });
     }

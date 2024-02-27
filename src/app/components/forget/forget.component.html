@@ -1,0 +1,9 @@
+<div class="mt-4">
+  <form [formGroup]="forgetPass" (ngSubmit)="submitForgetPass(forgetPass)">
+    <div class="mb-3">
+      <label>Email:</label>
+      <input formControlName="email" type="email" class="form-control" />
+    </div>
+    <button class="bg-main text-white d-block ms-auto btn">send</button>
+  </form>
+</div>

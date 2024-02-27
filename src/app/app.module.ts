@@ -10,10 +10,9 @@ import { RegisterComponent } from './components/register/register.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { HomeComponent } from './components/home/home.component';
 import { BrandsComponent } from './components/brands/brands.component';
-import { ProductsComponent } from './components/products/products.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { CartComponent } from './components/cart/cart.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
@@ -25,6 +24,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { ShippingAdressComponent } from './components/shipping-adress/shipping-adress.component';
 import { AllOrdersComponent } from './components/all-orders/all-orders.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { SearchPipe } from './pipes/search.pipe';
+import { ProductsComponent } from './components/products/products.component';
+import { ForgetComponent } from './components/forget/forget.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,6 @@ import { WishlistComponent } from './components/wishlist/wishlist.component';
     NotfoundComponent,
     HomeComponent,
     BrandsComponent,
-    ProductsComponent,
     CategoriesComponent,
     CartComponent,
     LoaderComponent,
@@ -45,6 +46,9 @@ import { WishlistComponent } from './components/wishlist/wishlist.component';
     ShippingAdressComponent,
     AllOrdersComponent,
     WishlistComponent,
+    SearchPipe,
+    ProductsComponent,
+    ForgetComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +59,7 @@ import { WishlistComponent } from './components/wishlist/wishlist.component';
     BrowserAnimationsModule,
     CarouselModule,
     ToastrModule.forRoot(),
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
