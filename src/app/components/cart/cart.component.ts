@@ -31,6 +31,7 @@ export class CartComponent {
       },
       error: (err) => {
         console.log(err);
+        this.LoadingService.loading.next(false);
       },
     });
   }

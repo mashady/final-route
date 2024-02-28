@@ -49,3 +49,6 @@ a:hover {
 .bg-main-light {
   background-color: var(--light-color) !important;
 }
+.fa-heart:hover {
+  color: #dc3545;
+}
