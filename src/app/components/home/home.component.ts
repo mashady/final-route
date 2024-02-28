@@ -23,24 +23,15 @@ export class HomeComponent {
   ) {}
 
   ngOnInit() {
-    /*
-    if (this._ProductsService.getData().length > 0) {
-      console.log(this._ProductsService.getData());
-    }
-
-*/
-
     if (this._ProductsService.hasData === true) {
       this.productList = this._ProductsService.getData();
-      //this.isLoading = false;
     } else {
       this.LoadingService.loading.next(true);
-
+      this._CartService.cartInit();
       this._ProductsService.getAllProducts().subscribe({
         next: (res) => {
           console.log(res.data);
           this.productList = res.data;
-          //this.isLoading = false;
           this._ProductsService.setData(res.data);
           this.LoadingService.loading.next(false);
         },
@@ -56,8 +47,10 @@ export class HomeComponent {
     this._CartService.addProductToCart(productId).subscribe({
       next: (res: any) => {
         console.log(res);
-        this._ToastrService.success('Hello world!', 'Toastr fun!');
-        //this._CartService.numberOfCartItems.next(res.numOfCartItems);
+        this._ToastrService.success('', 'it has been added successfully🎉');
+        this._CartService.numberOfCartItems.next(res.numOfCartItems);
+        //this._CartService.userCartData.next(res.data);
+        this._CartService.cartInit();
       },
       error: (err) => console.log(err),
     });
@@ -97,6 +90,7 @@ export class HomeComponent {
           console.log(res);
           this._WhishlistService.wishArray.push(productId);
           console.log(this._WhishlistService.wishArray);
+          this._ToastrService.success('', 'it has been added successfully🎉');
         },
         error: (err) => console.log(err),
       });

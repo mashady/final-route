@@ -15,8 +15,10 @@ export class NavbarComponent {
   ) {}
 
   ngOnInit(): void {
-    this._CartService.numberOfCartItems.subscribe(() => {
-      this.numberOfCart = this._CartService.numberOfCartItems.getValue();
+    this._CartService.numberOfCartItems.subscribe({
+      next: (res) => {
+        this.numberOfCart = res;
+      },
     });
     this._AuthService.userData.subscribe({
       next: () => {

@@ -13,7 +13,7 @@ import { BrandsComponent } from './components/brands/brands.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { CartComponent } from './components/cart/cart.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { SliderComponent } from './components/slider/slider.component';
@@ -27,7 +27,7 @@ import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { SearchPipe } from './pipes/search.pipe';
 import { ProductsComponent } from './components/products/products.component';
 import { ForgetComponent } from './components/forget/forget.component';
-
+import { HeaderInterceptor } from './header.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,7 +61,13 @@ import { ForgetComponent } from './components/forget/forget.component';
     ToastrModule.forRoot(),
     FormsModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HeaderInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

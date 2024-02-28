@@ -48,7 +48,8 @@ export class ProductsComponent {
     this._CartService.addProductToCart(productId).subscribe({
       next: (res: any) => {
         console.log(res);
-        this._ToastrService.success('Hello world!', 'Toastr fun!');
+        this._ToastrService.success('', 'it has been added successfully🎉');
+
         //this._CartService.numberOfCartItems.next(res.numOfCartItems);
       },
       error: (err) => console.log(err),
@@ -89,6 +90,7 @@ export class ProductsComponent {
           console.log(res);
           this._WhishlistService.wishArray.push(productId);
           console.log(this._WhishlistService.wishArray);
+          this._ToastrService.success('', 'it has been added successfully🎉');
         },
         error: (err) => console.log(err),
       });

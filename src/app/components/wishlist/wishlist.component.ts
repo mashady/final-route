@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { WhishlistService } from '../../services/whishlist.service';
 import { CartService } from '../../services/cart.service';
 import { LoadingService } from 'src/app/services/loading.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-wishlist',
@@ -13,7 +14,8 @@ export class WishlistComponent {
   constructor(
     public _WhishlistService: WhishlistService,
     public _CartService: CartService,
-    public LoadingService: LoadingService
+    public LoadingService: LoadingService,
+    private _ToastrService: ToastrService
   ) {}
   ngOnInit() {
     this.getWishes();
@@ -23,24 +25,6 @@ export class WishlistComponent {
   getWishes() {
     this.LoadingService.loading.next(true);
 
-    /**
-    if (this._WhishlistService.hasData === true) {
-      console.log('u already have the data');
-
-      console.log(this._WhishlistService.getData());
-    } else {
-      console.log('udidnot have hte data ');
-      this._WhishlistService.getUserWishlist().subscribe({
-        next: (res) => {
-          console.log(res);
-          this.wishes = res.data;
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
-    }
-    */
     this._WhishlistService.getUserWishlist().subscribe({
       next: (res) => {
         console.log(res);
@@ -58,7 +42,6 @@ export class WishlistComponent {
     this._WhishlistService.removeProductFromWishList(productId).subscribe({
       next: (res) => {
         console.log(res);
-        //this.wishes = this._WhishlistService.data;
         this._WhishlistService.getUserWishlist().subscribe({
           next: (res) => {
             this.wishes = res.data;
@@ -67,6 +50,20 @@ export class WishlistComponent {
       },
       error: (err) => {
         console.log(err);
+      },
+    });
+  }
+  addProductToCart(productId: string) {
+    this._CartService.addProductToCart(productId).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this._ToastrService.success('', 'it has been added successfully🎉');
+        this._CartService.numberOfCartItems.next(res.numOfCartItems);
+        this._CartService.cartInit();
+      },
+      error: (err) => console.log(err),
+      complete: () => {
+        this.removeOneFromWish(productId);
       },
     });
   }

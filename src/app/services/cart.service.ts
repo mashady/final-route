@@ -10,6 +10,8 @@ export class CartService {
     token: localStorage.getItem('userToken') || '',
   };
   numberOfCartItems = new BehaviorSubject(0);
+  userCartData = new BehaviorSubject(null);
+
   constructor(private _HttpClient: HttpClient) {
     this.cartInit();
   }
@@ -25,33 +27,34 @@ export class CartService {
     this.getUserCart().subscribe({
       next: (res: any) => {
         console.log(res);
-        console.log('this re from service');
+        console.log('cart serv init');
         this.numberOfCartItems.next(res.numOfCartItems);
+        this.userCartData.next(res.data); // deal with it as a behavior when add new items update it
       },
       error: (err) => console.error(err),
     });
   }
   getUserCart(): Observable<any> {
     return this._HttpClient.get(`${this.baseUrl}/api/v1/cart`, {
-      headers: this.headers,
+      //headers: this.headers,
     });
   }
   removeProductById(productId: string) {
     return this._HttpClient.delete(`${this.baseUrl}/api/v1/cart/${productId}`, {
-      headers: this.headers,
+      // headers: this.headers,
     });
   }
   updateCartCount(productId: string, count: number) {
     return this._HttpClient.put(
       `${this.baseUrl}/api/v1/cart/${productId}`,
-      { count: count },
-      { headers: this.headers }
+      { count: count }
+      // { headers: this.headers }
     );
   }
 
   clearCart() {
     return this._HttpClient.delete(`${this.baseUrl}/api/v1/cart/`, {
-      headers: this.headers,
+      // headers: this.headers,
     });
   }
 }
