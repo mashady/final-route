@@ -8,7 +8,7 @@ https://profound-moxie-4fca00.netlify.app/
 
 ## Screenshot
 
-![App Screenshot](promo/home.PNG)
+![App Screenshot](promo/home.png)
 
 ## Tech Stack
 
