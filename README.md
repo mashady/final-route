@@ -4,11 +4,11 @@ ecommerce and online store :)
 
 ## Demo
 
-https://profound-moxie-4fca00.netlify.app/home
+https://profound-moxie-4fca00.netlify.app/
 
 ## Screenshot
 
-![App Screenshot](promo/promo.PNG)
+![App Screenshot](promo/home.PNG)
 
 ## Tech Stack
 
