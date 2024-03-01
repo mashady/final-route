@@ -41,21 +41,21 @@ export class WhishlistService {
   getUserWishlist(): Observable<any> {
     this.hasData = true;
     return this._HttpClient.get(`${this.baseUrl}/api/v1/wishlist`, {
-      headers: this.headers,
+      //headers: this.headers,
     });
   }
 
   addProductToWishlist(productId: string) {
     return this._HttpClient.post(
       `${this.baseUrl}/api/v1/wishlist`,
-      { productId: productId },
-      { headers: this.headers }
+      { productId: productId }
+      //{ headers: this.headers }
     );
   }
   removeProductFromWishList(productId: string) {
     return this._HttpClient.delete(
-      `${this.baseUrl}/api/v1/wishlist/${productId}`,
-      { headers: this.headers }
+      `${this.baseUrl}/api/v1/wishlist/${productId}`
+      //{ headers: this.headers }
     );
   }
 }
